@@ -1,24 +1,25 @@
-# Challenge: Gallery Page with Filtering
+# Challenge 03: Gallery Page with Filtering
 
-## What You're Building
-
-The gallery page shows all tracks from the music data files in a responsive
-card grid. Users can type in a search box to filter by title or artist, and
-use a dropdown to filter by genre.
-
-The starter code in `app/gallery/page.js` already:
-- imports all three JSON files and combines them into `allTracks`
-- renders all cards via the `MusicCard` component
-- has the search input and genre dropdown in the JSX (not wired up yet)
-
-Your job is to wire up the state so the displayed tracks update as the user
-types or selects a genre.
+> **Best for:** Intermediate students working on state — you can build basic
+> components and want to practise solving a real problem with `useState`.
 
 ---
 
-## How the Data Is Structured
+## What You're Building
 
-Each file in `data/` exports an array of track objects. Here's one example:
+The gallery page shows all tracks from the music data files in a card grid.
+Users can type in a search box to filter by title or artist, and choose a
+genre from a dropdown.
+
+The starter code in `app/gallery/page.js` already imports the data and
+renders the UI — but `visibleTracks` is an empty array, so nothing shows yet.
+Your job is to add state, wire up the inputs, and write the filter logic.
+
+---
+
+## How the data is structured
+
+Each file in `data/` exports an array of track objects. One example:
 
 ```json
 {
@@ -33,96 +34,103 @@ Each file in `data/` exports an array of track objects. Here's one example:
 }
 ```
 
-The fields with `str` prefixes are strings, `int` prefixes are numbers stored
-as strings (matching The Audio DB API format).
+Fields starting with `str` are strings, `int` fields are numbers stored as
+strings (matching The Audio DB API convention).
 
 ---
 
-## Core Concepts
+## Part 1: Show all tracks (no filtering yet)
 
-### Adding state
+Before adding filters, get all tracks showing on the page.
 
-Add two pieces of state at the top of `GalleryPage`:
+Replace `const visibleTracks = []` with:
+
+```jsx
+const visibleTracks = allTracks;
+```
+
+Save and check the browser — you should see all track cards appear.
+
+---
+
+## Part 2: Add state for the inputs
+
+Add two pieces of state near the top of `GalleryPage`. Each `useState` call
+returns the current value and a function to update it:
 
 ```jsx
 const [query, setQuery] = useState("");
 const [genre, setGenre] = useState("All");
 ```
 
-Wire them to the input and select:
-
-```jsx
-<input
-  value={query}
-  onChange={(e) => setQuery(e.target.value)}
-  ...
-/>
-
-<select
-  value={genre}
-  onChange={(e) => setGenre(e.target.value)}
-  ...
->
-```
+Wire them to the input and select by adding `value` and `onChange` attributes.
+`onChange` receives a browser event object — the typed value is at `e.target.value`.
 
 > **Docs:** [Responding to events](https://react.dev/learn/responding-to-events)
 > **Docs:** [State: a component's memory](https://react.dev/learn/state-a-components-memory)
 
 ---
 
-### Filtering the array
+## Part 3: Filter the tracks
 
 Replace `const visibleTracks = allTracks` with a filtered version.
-`Array.filter()` returns a new array containing only the items that pass your
-test function:
 
-```jsx
-const visibleTracks = allTracks.filter((track) => {
-  // Return true to include this track, false to exclude it.
-  const matchesQuery =
-    track.strTrack.toLowerCase().includes(query.toLowerCase()) ||
-    track.strArtist.toLowerCase().includes(query.toLowerCase());
+`Array.filter()` takes a function and returns a new array with only the items
+where your function returns `true`:
 
-  const matchesGenre = genre === "All" || track.strGenre === genre;
-
-  return matchesQuery && matchesGenre;
+```js
+const filtered = someArray.filter((item) => {
+  // return true to keep this item, false to remove it
 });
 ```
 
-Both conditions must be true for a track to appear. When `query` is empty,
-`includes("")` is always true, so all tracks pass the text filter.
+You'll need two conditions — one for the text query, one for the genre.
+Both should be true for a track to appear in the results.
+
+Useful tools:
+- `String.toLowerCase()` — normalise case so "nirvana" matches "Nirvana"
+- `String.includes(substring)` — check if a string contains another string
+
+Try to write this yourself before looking at examples.
 
 > **Docs:** [Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
+> **Docs:** [String.includes()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
 
 ---
 
-## Extension Tasks
+## Why `"use client"`?
+
+You'll notice `"use client"` at the top of `gallery/page.js`.
+
+In Next.js App Router, pages run on the server by default — they generate HTML
+and send it to the browser. But `useState` only works in the browser, so any
+component that uses state needs `"use client"` to tell Next.js to render it
+client-side.
+
+Your home page doesn't need it because it has no interactivity.
+
+---
+
+## Extension tasks
 
 Once basic filtering works, try these:
 
-1. **Sort the results.** Add a sort dropdown with options like "Title A–Z",
-   "Artist A–Z". Use `Array.sort()` on `visibleTracks` before rendering.
+1. **Sort the results.** Add a sort dropdown ("Title A–Z", "Artist A–Z").
+   Use `Array.sort()` on `visibleTracks` after filtering.
 
-2. **Show a "no results" message.** If `visibleTracks.length === 0`, render a
-   paragraph instead of the grid:
+2. **Empty state.** If `visibleTracks.length === 0`, show a "No tracks found"
+   message. The starter already has a conditional render set up for this —
+   look at how it's structured and make it show your message.
 
-   ```jsx
-   {visibleTracks.length === 0 ? (
-     <p className="text-zinc-500">No tracks match your search.</p>
-   ) : (
-     <div className="grid ...">...</div>
-   )}
-   ```
-
-3. **Clear the filters.** Add a "Clear" button that resets `query` to `""`
-   and `genre` to `"All"`. Only show it when a filter is active.
+3. **Clear button.** Add a button that resets `query` to `""` and `genre` to
+   `"All"`. Only show it when a filter is active.
 
 ---
 
 ## Check Your Work
 
-- [ ] Typing in the search box hides tracks that don't match
-- [ ] Selecting a genre shows only tracks from that genre
-- [ ] Both filters work together (genre + text search at the same time)
+- [ ] All tracks show before any filtering
+- [ ] Typing in the search box hides non-matching tracks
+- [ ] Selecting a genre shows only tracks of that genre
+- [ ] Both filters work together at the same time
 - [ ] The track count updates as you filter
-- [ ] Clearing the input shows all tracks again

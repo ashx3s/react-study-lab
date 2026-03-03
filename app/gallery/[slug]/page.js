@@ -13,16 +13,19 @@ const allTracks = [...rockTracks, ...jazzTracks, ...electronicTracks];
 //   return allTracks.map((track) => ({ slug: track.slug }));
 // }
 
-// params.slug comes from the folder name [slug] — it matches whatever
-// the user typed in the URL, e.g. /gallery/nirvana-smells-like-teen-spirit
+// Next.js reads the URL, matches the [slug] segment in the folder name, and
+// automatically passes the matched value to your page as params.slug.
+// You don't have to write any URL-parsing code — the framework handles it.
+//
+// Example: /gallery/nirvana-smells-like-teen-spirit → params.slug === "nirvana-smells-like-teen-spirit"
 export default function GalleryItemPage({ params }) {
-  // TODO: Find the track in allTracks whose slug matches params.slug.
-  // Hint: use Array.find() — it returns the first item that passes your test,
-  // or undefined if nothing matches.
-  const track = null; // replace this line
+  // Challenge 04: Replace null with Array.find() to look up the matching track.
+  // Hint: use allTracks.find((t) => t.slug === params.slug)
+  const track = null;
 
-  // TODO: Uncomment the line below once you have a real track lookup above.
-  // if (!track) notFound();
+  // This will show a 404 until you implement the find() above.
+  // Once track is found, notFound() won't be called and the page will render.
+  if (!track) notFound();
 
   return (
     <main className="container mx-auto px-4 py-10">
@@ -32,8 +35,8 @@ export default function GalleryItemPage({ params }) {
         ← Back to Gallery
       </Link>
 
-      {/* TODO: Replace the placeholder below with the track's actual fields.
-          Use the same field names from the JSON data (strTrack, strArtist, etc.) */}
+      {/* Challenge 04: Replace this placeholder with the track's actual fields.
+          Use the field names from the JSON data: strTrack, strArtist, strAlbum, strGenre */}
       <p className="mt-6 text-zinc-400">
         Placeholder — looking up slug: <code>{params.slug}</code>
       </p>

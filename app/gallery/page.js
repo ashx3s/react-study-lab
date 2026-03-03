@@ -1,4 +1,6 @@
-"use client"; // This page needs state for the search and filter controls
+"use client"; // This page needs state for the search and filter controls.
+// In Next.js App Router, components are server-rendered by default.
+// "use client" opts this page into the browser where useState can work.
 
 import { useState } from "react";
 import MusicCard from "@/app/components/MusicCard";
@@ -6,18 +8,18 @@ import rockTracks from "@/data/rock.json";
 import jazzTracks from "@/data/jazz.json";
 import electronicTracks from "@/data/electronic.json";
 
-// Combine all genre arrays into one list to display in the gallery.
-// Each item is a track object with fields like strTrack, strArtist, slug, etc.
+// Combine all genre arrays into one list.
+// Each item has fields like strTrack, strArtist, strAlbum, strGenre, slug.
 const allTracks = [...rockTracks, ...jazzTracks, ...electronicTracks];
 
 export default function GalleryPage() {
-  // TODO: Add state for the search input and genre dropdown.
+  // Challenge 03: Add state for the search input and genre dropdown.
   // const [query, setQuery] = useState("");
   // const [genre, setGenre] = useState("All");
 
-  // TODO: Replace allTracks below with a filtered version based on query and genre.
-  // Hint: Array.filter() and String.toLowerCase() will be useful here.
-  const visibleTracks = allTracks;
+  // Challenge 03: Replace this empty array with a filtered version of allTracks.
+  // Right now nothing renders — that's intentional. Add state and filtering to fix it.
+  const visibleTracks = [];
 
   return (
     <main className="container mx-auto px-4 py-10">
@@ -29,11 +31,11 @@ export default function GalleryPage() {
           type="text"
           placeholder="Search by title or artist..."
           className="flex-1 rounded-lg border border-zinc-300 px-4 py-2 text-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-400"
-          // TODO: Add value={query} and onChange to update state
+          // Challenge 03: Add value={query} and onChange to update state
         />
         <select
           className="rounded-lg border border-zinc-300 px-4 py-2 text-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-400"
-          // TODO: Add value={genre} and onChange to update state
+          // Challenge 03: Add value={genre} and onChange to update state
         >
           <option value="All">All Genres</option>
           <option value="Rock">Rock</option>
@@ -42,15 +44,21 @@ export default function GalleryPage() {
         </select>
       </div>
 
-      {/* Result count — useful feedback for users once filtering is wired up */}
+      {/* Result count */}
       <p className="mb-4 text-sm text-zinc-500">{visibleTracks.length} tracks</p>
 
-      {/* Grid of MusicCard components — one per visible track */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {visibleTracks.map((track) => (
-          <MusicCard key={track.idTrack} track={track} />
-        ))}
-      </div>
+      {visibleTracks.length === 0 ? (
+        // This placeholder disappears once you wire up state and filtering
+        <p className="text-zinc-400">
+          No tracks yet — see docs/03-gallery.md to wire up the filters.
+        </p>
+      ) : (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {visibleTracks.map((track) => (
+            <MusicCard key={track.idTrack} track={track} />
+          ))}
+        </div>
+      )}
     </main>
   );
 }

@@ -1,20 +1,33 @@
-# Challenge: Responsive Navigation Menu
+# Challenge 02: Responsive Navigation Menu
+
+> **Best for:** Students comfortable with components who want to explore
+> Tailwind's responsive system and practise working with state independently.
+
+---
 
 ## What You're Building
 
-The `SiteHeader` component already has a working mobile nav toggle using a
-plain "Menu" text button. Your job is to make it production-quality: replace
-the text with an icon, improve the styling, and make the nav close when a link
-is clicked.
+The `SiteHeader` component has a working mobile nav toggle, but it's unfinished:
+the button says "Menu" instead of showing an icon, and the nav doesn't close
+when a link is clicked.
 
-This challenge is intentionally open-ended. You're given tasks and hints, not
-step-by-step instructions — work it out from the Tailwind and React docs.
+Your job is to make it production-quality.
+
+Open `app/components/SiteHeader.js` and read through it before you change anything.
+
+---
+
+## A note on format
+
+This challenge gives you tasks and hints — not step-by-step instructions.
+That's intentional. You have the tools now: use the task list, read the docs,
+and work it out. This is what real development feels like.
 
 ---
 
 ## Tasks
 
-### 1. Install Iconify and add a hamburger icon
+### 1. Replace the "Menu" text with a hamburger icon
 
 Install the Iconify React package:
 
@@ -22,34 +35,25 @@ Install the Iconify React package:
 npm install @iconify/react
 ```
 
-Import the `Icon` component and use it in place of the "Menu" text:
-
-```jsx
-import { Icon } from "@iconify/react";
-// ...
-<Icon icon="mdi:menu" width={24} />
-```
-
-When the menu is open, swap to a close icon:
-
-```jsx
-<Icon icon={isMenuOpen ? "mdi:close" : "mdi:menu"} width={24} />
-```
+Then find the right icon to use in your button.
 
 > **Docs:** [Iconify for React](https://iconify.design/docs/icon-components/react/)
-> **Icon search:** [Iconify icon sets](https://icon-sets.iconify.design/)
+> **Find an icon:** [Iconify icon search](https://icon-sets.iconify.design/)
+
+When the menu is open the icon should change to a close/X icon.
+Hint: use a ternary (`condition ? valueA : valueB`) on the `icon` prop.
 
 ---
 
 ### 2. Style the header
 
-Make the header feel more polished. Some directions to explore:
+The current header is functional but plain. Make it more polished using Tailwind.
+Some directions to explore:
 
-- Add a subtle drop shadow: `shadow-sm`
-- Give the header a background colour that stands out from the page body
-- Make the nav links feel interactive — try `transition-colors duration-150`
-- Add an `aria-expanded` attribute to the hamburger button that reflects
-  `isMenuOpen` — this improves accessibility
+- A subtle drop shadow: `shadow-sm`
+- A background colour that gives the header some separation from the page
+- Link hover transitions: `transition-colors duration-150`
+- Add `aria-expanded={isMenuOpen}` to the hamburger button for accessibility
 
 > **Docs:** [Tailwind hover, focus, and other states](https://tailwindcss.com/docs/hover-focus-and-other-states)
 
@@ -57,57 +61,47 @@ Make the header feel more polished. Some directions to explore:
 
 ### 3. Close the menu when a nav link is clicked
 
-Right now the mobile menu stays open after the user taps a link. Fix this by
-calling `setIsMenuOpen(false)` in an `onClick` on each mobile nav `<Link>`.
+On mobile, the menu stays open after a link is tapped. Fix this by calling
+`setIsMenuOpen(false)` in an `onClick` on each mobile `<Link>`.
 
-Think about whether there is a cleaner way to do this if the nav list grows —
-could you map over an array of links instead of repeating the JSX?
+Once it works, consider whether there's a cleaner pattern — could you map over
+an array of `{ href, label }` objects instead of repeating the JSX for each link?
 
 ---
 
-### 4. Highlight the active page
+### 4. Highlight the active page link
 
-Use Next.js's `usePathname` hook to get the current URL path, then apply a
-different style to the link that matches.
-
-```jsx
-"use client";
-import { usePathname } from "next/navigation";
-
-const pathname = usePathname();
-// pathname will be "/" on the home page and "/gallery" on the gallery page
-```
+Use Next.js's `usePathname` hook to get the current URL, then apply a different
+style to the link that matches.
 
 > **Docs:** [usePathname](https://nextjs.org/docs/app/api-reference/functions/use-pathname)
 
 ---
 
-## Background: How the Toggle Works
+## Background: How the toggle works
 
-`useState(false)` creates a piece of state that starts as `false`. The
-`setIsMenuOpen` function updates it. When state changes, React re-renders the
-component with the new value.
+`useState(false)` creates a piece of state that starts as `false`. When state
+changes, React re-renders the component with the new value.
 
 ```
 isMenuOpen = false  →  mobile nav is hidden  (default)
 isMenuOpen = true   →  mobile nav is visible (after button click)
 ```
 
-The button's `onClick` handler flips the value:
+The button flips the value with the `!` (not) operator:
 
 ```jsx
 onClick={() => setIsMenuOpen(!isMenuOpen)}
-// !false → true, !true → false — toggles back and forth
+// !false → true, !true → false
 ```
 
-The mobile nav in the JSX uses a conditional render:
+The mobile nav uses a short-circuit render:
 
 ```jsx
 {isMenuOpen && <nav>...</nav>}
 ```
 
-`&&` is a short-circuit: if the left side is falsy, nothing renders. If it's
-truthy, the right side renders.
+If `isMenuOpen` is falsy, nothing renders. If it's truthy, the nav renders.
 
 > **Docs:** [Conditional rendering](https://react.dev/learn/conditional-rendering)
 > **Docs:** [useState](https://react.dev/reference/react/useState)
