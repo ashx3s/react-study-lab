@@ -14,51 +14,30 @@ const allTracks = [...rockTracks, ...jazzTracks, ...electronicTracks];
 
 export default function GalleryPage() {
   // Challenge 03: Add state for the search input and genre dropdown.
-  // const [query, setQuery] = useState("");
-  // const [genre, setGenre] = useState("All");
+  // You need two pieces of state: one to hold the current text input value,
+  // and one to hold the currently selected genre. Think about what initial
+  // values make sense before any user interaction has happened.
 
   // Challenge 03: Replace this empty array with a filtered version of allTracks.
   // Right now nothing renders — that's intentional. Add state and filtering to fix it.
   const visibleTracks = [];
 
+  // Tip: if visibleTracks is empty after you add your filter, add a fallback so
+  // you can tell whether filtering is working or returning no matches.
+  // Example pattern (uncomment and place in your JSX to try it):
+  // {visibleTracks.length === 0 && <p>No tracks match your search.</p>}
+
   return (
     <main className="container mx-auto px-4 py-10">
-      <h1 className="mb-6 text-3xl font-bold text-zinc-900">Music Gallery</h1>
+      <h1 className="mb-6 text-3xl font-bold text-zinc-900 dark:text-zinc-50">Music Gallery</h1>
 
-      {/* Search and filter controls */}
-      <div className="mb-8 flex flex-col gap-4 sm:flex-row">
-        <input
-          type="text"
-          placeholder="Search by title or artist..."
-          className="flex-1 rounded-lg border border-zinc-300 px-4 py-2 text-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-400"
-          // Challenge 03: Add value={query} and onChange to update state
-        />
-        <select
-          className="rounded-lg border border-zinc-300 px-4 py-2 text-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-400"
-          // Challenge 03: Add value={genre} and onChange to update state
-        >
-          <option value="All">All Genres</option>
-          <option value="Rock">Rock</option>
-          <option value="Jazz">Jazz</option>
-          <option value="Electronic">Electronic</option>
-        </select>
-      </div>
+      {/* Challenge 03: Add a text input (search by title or artist) and a
+          genre select dropdown (options: All, Rock, Jazz, Electronic).
+          Wire each to its state value and setter using value and onChange. */}
 
-      {/* Result count */}
-      <p className="mb-4 text-sm text-zinc-500">{visibleTracks.length} tracks</p>
-
-      {visibleTracks.length === 0 ? (
-        // This placeholder disappears once you wire up state and filtering
-        <p className="text-zinc-400">
-          No tracks yet — see docs/03-gallery.md to wire up the filters.
-        </p>
-      ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {visibleTracks.map((track) => (
-            <MusicCard key={track.idTrack} track={track} />
-          ))}
-        </div>
-      )}
+      {/* Challenge 03: Render the visibleTracks array as a card grid.
+          Use the MusicCard component for each item — it expects a track prop.
+          Each track has a unique idTrack field you can use as the key. */}
     </main>
   );
 }

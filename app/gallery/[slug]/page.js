@@ -18,9 +18,15 @@ const allTracks = [...rockTracks, ...jazzTracks, ...electronicTracks];
 // You don't have to write any URL-parsing code — the framework handles it.
 //
 // Example: /gallery/nirvana-smells-like-teen-spirit → params.slug === "nirvana-smells-like-teen-spirit"
-export default function GalleryItemPage({ params }) {
-  // Challenge 04: Replace null with Array.find() to look up the matching track.
-  // Hint: use allTracks.find((t) => t.slug === params.slug)
+//
+// In Next.js 15+, params is a Promise, so the function must be async and
+// you must await params before reading any property from it.
+export default async function GalleryItemPage({ params }) {
+  // Await params before reading slug — required in Next.js 15+.
+  const { slug } = await params;
+
+  // Challenge 04: Replace null with a lookup that finds the track whose slug
+  // matches the slug variable above. Array.find() is the right tool — check MDN for how it works.
   const track = null;
 
   // This will show a 404 until you implement the find() above.
@@ -29,17 +35,12 @@ export default function GalleryItemPage({ params }) {
 
   return (
     <main className="container mx-auto px-4 py-10">
+      {/* Challenge 04: Build the detail view inside this article element.
+          Include a link back to /gallery, the track title, artist,
+          album, and genre. Field names are in the JSON data files. */}
+      <article>
 
-      {/* Back link */}
-      <Link href="/gallery" className="text-sm text-zinc-500 hover:text-zinc-900">
-        ← Back to Gallery
-      </Link>
-
-      {/* Challenge 04: Replace this placeholder with the track's actual fields.
-          Use the field names from the JSON data: strTrack, strArtist, strAlbum, strGenre */}
-      <p className="mt-6 text-zinc-400">
-        Placeholder — looking up slug: <code>{params.slug}</code>
-      </p>
+      </article>
     </main>
   );
 }
