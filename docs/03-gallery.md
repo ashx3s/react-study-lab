@@ -125,6 +125,26 @@ Once basic filtering works, try these:
 3. **Clear button.** Add a button that resets `query` to `""` and `genre` to
    `"All"`. Only show it when a filter is active.
 
+4. **Read the genre from the URL.** If someone navigates to `/gallery?genre=Rock`,
+   initialise the genre filter to `"Rock"` automatically. Use Next.js
+   `useSearchParams` to read the query string on load. This unlocks a
+   collaboration with the home page — students who finished challenge 01 can
+   link their genre cards directly to pre-filtered gallery results.
+
+   ```jsx
+   "use client";
+   import { useSearchParams } from "next/navigation";
+
+   // Inside your component, before useState:
+   const searchParams = useSearchParams();
+   const initialGenre = searchParams.get("genre") ?? "All";
+
+   // Then pass initialGenre as the default value to useState:
+   const [genre, setGenre] = useState(initialGenre);
+   ```
+
+   > **Docs:** [useSearchParams](https://nextjs.org/docs/app/api-reference/functions/use-search-params)
+
 ---
 
 ## Check Your Work

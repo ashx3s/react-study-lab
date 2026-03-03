@@ -5,6 +5,23 @@ You'll build a music browsing site using static JSON data and the Next.js App Ro
 
 ---
 
+## Get a copy
+
+To work on this project you'll need your own copy of the repository.
+
+**Option 1 — Fork (recommended if you have a GitHub account)**
+
+Click **Fork** at the top of the GitHub page. This creates your own copy under your account so you can commit and push freely.
+
+**Option 2 — Download a ZIP**
+
+Click **Code → Download ZIP** on the GitHub page, then extract it to a folder on your computer.
+You won't have git history or the ability to push, but it's fine for working through the challenges locally.
+
+Once you have a copy, open a terminal in the `react-study-lab/` folder and continue below.
+
+---
+
 ## Getting started
 
 All commands run from the `react-study-lab/` folder:
