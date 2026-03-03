@@ -1,0 +1,42 @@
+[
+  {
+    "idTrack": "jazz-001",
+    "slug": "miles-davis-so-what",
+    "strTrack": "So What",
+    "strArtist": "Miles Davis",
+    "strAlbum": "Kind of Blue",
+    "strGenre": "Jazz",
+    "intDuration": "565000",
+    "strArtistThumb": null
+  },
+  {
+    "idTrack": "jazz-002",
+    "slug": "dave-brubeck-take-five",
+    "strTrack": "Take Five",
+    "strArtist": "Dave Brubeck Quartet",
+    "strAlbum": "Time Out",
+    "strGenre": "Jazz",
+    "intDuration": "324000",
+    "strArtistThumb": null
+  },
+  {
+    "idTrack": "jazz-003",
+    "slug": "john-coltrane-a-love-supreme",
+    "strTrack": "A Love Supreme, Pt. I – Acknowledgement",
+    "strArtist": "John Coltrane",
+    "strAlbum": "A Love Supreme",
+    "strGenre": "Jazz",
+    "intDuration": "474000",
+    "strArtistThumb": null
+  },
+  {
+    "idTrack": "jazz-004",
+    "slug": "chet-baker-my-funny-valentine",
+    "strTrack": "My Funny Valentine",
+    "strArtist": "Chet Baker",
+    "strAlbum": "Chet Baker Sings",
+    "strGenre": "Jazz",
+    "intDuration": "187000",
+    "strArtistThumb": null
+  }
+]

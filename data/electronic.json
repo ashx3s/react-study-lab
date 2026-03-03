@@ -1,0 +1,42 @@
+[
+  {
+    "idTrack": "electronic-001",
+    "slug": "daft-punk-get-lucky",
+    "strTrack": "Get Lucky",
+    "strArtist": "Daft Punk",
+    "strAlbum": "Random Access Memories",
+    "strGenre": "Electronic",
+    "intDuration": "369000",
+    "strArtistThumb": null
+  },
+  {
+    "idTrack": "electronic-002",
+    "slug": "aphex-twin-windowlicker",
+    "strTrack": "Windowlicker",
+    "strArtist": "Aphex Twin",
+    "strAlbum": "Windowlicker",
+    "strGenre": "Electronic",
+    "intDuration": "397000",
+    "strArtistThumb": null
+  },
+  {
+    "idTrack": "electronic-003",
+    "slug": "the-chemical-brothers-block-rockin-beats",
+    "strTrack": "Block Rockin' Beats",
+    "strArtist": "The Chemical Brothers",
+    "strAlbum": "Dig Your Own Hole",
+    "strGenre": "Electronic",
+    "intDuration": "228000",
+    "strArtistThumb": null
+  },
+  {
+    "idTrack": "electronic-004",
+    "slug": "boards-of-canada-roygbiv",
+    "strTrack": "Roygbiv",
+    "strArtist": "Boards of Canada",
+    "strAlbum": "Music Has the Right to Children",
+    "strGenre": "Electronic",
+    "intDuration": "157000",
+    "strArtistThumb": null
+  }
+]

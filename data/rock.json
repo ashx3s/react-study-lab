@@ -1,0 +1,42 @@
+[
+  {
+    "idTrack": "rock-001",
+    "slug": "nirvana-smells-like-teen-spirit",
+    "strTrack": "Smells Like Teen Spirit",
+    "strArtist": "Nirvana",
+    "strAlbum": "Nevermind",
+    "strGenre": "Rock",
+    "intDuration": "301000",
+    "strArtistThumb": null
+  },
+  {
+    "idTrack": "rock-002",
+    "slug": "radiohead-creep",
+    "strTrack": "Creep",
+    "strArtist": "Radiohead",
+    "strAlbum": "Pablo Honey",
+    "strGenre": "Rock",
+    "intDuration": "238000",
+    "strArtistThumb": null
+  },
+  {
+    "idTrack": "rock-003",
+    "slug": "foo-fighters-everlong",
+    "strTrack": "Everlong",
+    "strArtist": "Foo Fighters",
+    "strAlbum": "The Colour and the Shape",
+    "strGenre": "Rock",
+    "intDuration": "250000",
+    "strArtistThumb": null
+  },
+  {
+    "idTrack": "rock-004",
+    "slug": "the-beatles-let-it-be",
+    "strTrack": "Let It Be",
+    "strArtist": "The Beatles",
+    "strAlbum": "Let It Be",
+    "strGenre": "Rock",
+    "intDuration": "243000",
+    "strArtistThumb": null
+  }
+]
